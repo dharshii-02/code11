@@ -1,0 +1,35 @@
+#include <vector>
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    int n, q, val;
+    cin >> n;
+    
+    vector<int> v(n);
+    for (int i = 0; i < n; i++) {
+        cin >> v[i];
+    }
+    
+    cin >> q;
+    while (q--) {
+        cin >> val;
+        
+        // Find the first element >= val
+        auto it = lower_bound(v.begin(), v.end(), val);
+        
+        // Calculate 1-based index using iterator arithmetic
+        int index = (it - v.begin()) + 1;
+        
+        // Check if the value at the found position is exactly the target
+        if (it != v.end() && *it == val) {
+            cout << "Yes " << index << endl;
+        } else {
+            cout << "No " << index << endl;
+        }
+    }
+    
+    return 0;
+}
